@@ -2,9 +2,9 @@
 
 class UserStorage {
     static #users = {
-        id : ['woorimIT', '나개발', '김팀장'],
-        psword :['1234','1234', '123456'],
-        name : ['우리밋',  '나개발', '김팀장'],
+        id : ['woorimIT', '나개발', 'id'],
+        psword :['1234','123456', 'password'],
+        name : ['우리밋',  '나개발', 'test'],
     };
 
     static getUsers(...fields) {
@@ -17,6 +17,16 @@ class UserStorage {
         }, {});
         return newUsers;
     };
+    static getUserInfo(id) {
+        const user = this.#users;
+        const idx = user.id.indexOf(id);
+        const usersKeys = Object.keys(user);
+        const userInfo = usersKeys.reduce((newUser, info) => {
+            newUser[idx] = user[info][idx];
+            return newUser;
+        }, {})
+        return userInfo;
+    }
 }
 
 module.exports = UserStorage;
